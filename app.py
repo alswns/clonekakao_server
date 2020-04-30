@@ -30,9 +30,10 @@ def isRegi():
 def getImage():
     auth=db['auth']
     data=auth.find({"phone":"0104942613"})
+    
     for i in data:
         print(i['image'])
-        return i['image']
+        return jsonify([{'image':i['image']}])
 @app.route('/register',methods=['POST'])
 def regiser():
     auth=db['auth']
