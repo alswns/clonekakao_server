@@ -17,14 +17,14 @@ def index():
 def isRegi():
     auth=db['auth']
     phone=request.args.get('phone')
+    print(phone)
     # regex = re.compile(r'(\d{3})-(\d{4}-\d{4})')
     # matchobj=regex.search(phone)
     # areaCode=matchobj.group(1)
     # num=matchobj.group(2)
     if phone==None:
-        abort(400)
-        return False
-    return True
+        return "false"
+    return "true"
 
 @app.route('/register',methods=['POST'])
 def regiser():
