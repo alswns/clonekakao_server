@@ -2,10 +2,10 @@ from flask import Flask,request,jsonify,abort
 import pymongo
 from pymongo import MongoClient
 import re
-
+import os
 conn=MongoClient('localhost',27017)
 db=conn['auth']
-app = Flask(__name__)
+app = Flask(__name__,static_url_path='/static')
     
 
 
@@ -31,15 +31,20 @@ def isRegi():
 def regiser():
     auth=db['auth']
     json=request.json
-    phone=json['phone']
-    for i in auth.find({'phone':phone}):
-        print('이미있는아이디입니다')
-        return "used"
-    auth.insert(json)
-    print('회원가입성공')
-    return "complet"
-    print(json)
-    
+    print(request.form)
+    print(request.files['image'])
+    request.files['image'].save(os.path.join("./test.jpg"))
+    # print(request.form['image'])
+    # print(request.form['image'])
+    # phone=json['phone']
+    # for i in auth.find({'phone':phone}):
+    #     print('이미있는아이디입니다')
+    #     return "used"
+    # auth.insert(json)
+    # print('회원가입성공')
+    # return "complet"
+    # print(json)
+    return "good"
     # auth.insert()
 @app.route('/auth',methods=['POST'])
 def login():
