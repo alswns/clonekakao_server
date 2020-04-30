@@ -22,9 +22,10 @@ def isRegi():
     # matchobj=regex.search(phone)
     # areaCode=matchobj.group(1)
     # num=matchobj.group(2)
-    if phone==None:
-        return "false"
-    return "true"
+    for i in auth.find({'phone':phone}):   
+        return "true"
+    return "false"
+
 
 @app.route('/register',methods=['POST'])
 def regiser():
@@ -34,9 +35,6 @@ def regiser():
     for i in auth.find({'phone':phone}):
         print('이미있는아이디입니다')
         return "이미있는아이디"
-    if json['pw']!=json['repw']:
-        print('비밀번호가 일치하지않습니다')
-        return "비밀번호가 일치하지않음"
     auth.insert(json)
     print('회원가입성공')
     return "회원가입 성공"
