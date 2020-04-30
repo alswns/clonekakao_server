@@ -33,7 +33,7 @@ def getImage():
     
     for i in data:
         print(i['image'])
-        return jsonify({'image':i['image']})
+        return jsonify(image=i['image'])
 @app.route('/register',methods=['POST'])
 def regiser():
     auth=db['auth']
