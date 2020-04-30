@@ -34,7 +34,7 @@ def regiser():
     print(request.form)
     # print(request.files['image'])
     # request.files['image']
-    auth.insert({"name":request.form['name'],"image":  request.form['image'],"phone":request.form['name']})
+    auth.insert({"name":request.form['name'],"image":  request.form['image'],"phone":request.form['phone']})
     # print(request.form['image'])
     # print(request.form['image'])
     # phone=json['phone']
