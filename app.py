@@ -34,10 +34,10 @@ def regiser():
     phone=json['phone']
     for i in auth.find({'phone':phone}):
         print('이미있는아이디입니다')
-        return "이미있는아이디"
+        return "used"
     auth.insert(json)
     print('회원가입성공')
-    return "회원가입 성공"
+    return "complet"
     print(json)
     
     # auth.insert()
