@@ -23,8 +23,8 @@ def isRegi():
     # areaCode=matchobj.group(1)
     # num=matchobj.group(2)
     for i in auth.find({'phone':phone}):   
-        return "true"
-    return "false"
+        return jsonify(isRegi=True)
+    return jsonify(isRegi=False)
 
 @app.route('/getImage')
 def getImage():
@@ -39,21 +39,15 @@ def regiser():
     auth=db['auth']
     json=request.json
     print(request.form)
-    # print(request.files['image'])
-    # request.files['image']
-    auth.insert({"name":request.form['name'],"image":  request.form['image'],"phone":request.form['phone']})
-    # print(request.form['image'])
-    # print(request.form['image'])
-    # phone=json['phone']
-    # for i in auth.find({'phone':phone}):
-    #     print('이미있는아이디입니다')
-    #     return "used"
-    # auth.insert(json)
-    # print('회원가입성공')
-    # return "complet"
-    # print(json)
-    return "good"
-    # auth.insert()
+    try:
+        auth.insert({"name":request.form['name'],"image":  request.form['image'],"phone":request.form['phone']})
+        return jsonify(meseege="complet")
+    except expression as identifier:
+        return jsonify(meseege="failed")
+
+    
+    
+    
 @app.route('/auth',methods=['POST'])
 def login():
     auth=db['auth']
@@ -68,10 +62,10 @@ def login():
     for i in a:
         print(i)
         if i['pw']==pw:
-            return 'true'
+            return jsonify(success=True,code=400,message="seccess")
 
     if id==None or pw==None:
-        return None
-    return 'false'
+        return jsonify(success=False,message="Id or Pw was Null",code=406)
+    return jsonify(success=False,message="server error",code=500)
 
 app.run(host='0.0.0.0',port=80, debug=True) 
